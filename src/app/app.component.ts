@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/user/services/user.service';
+import { User } from 'src/app/user/models/user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'scrum-app';
+
+  user: User = null;
+
+  constructor(private userService: UserService) {
+    // for always
+    this.userService.user$.subscribe(
+      user => {
+        this.user = user;
+      }
+    );
+  }
 }

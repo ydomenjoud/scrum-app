@@ -1,0 +1,21 @@
+language: node_js
+node_js: "8"
+
+jobs:
+  include:
+
+    # BUILD LIB
+    - stage: "CI"
+      name: "Build library & playground"
+      script:
+        - ng build --prod --base-href https://ydomenjoud.github.io/scrum-app/
+        - npx ngh --dir=dist/scrum-app --repo=https://GH_TOKEN@github.com/ydomenjoud/scrum-app.git --name="Ydomenjoud" --email=yannick@6tech.net
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GH_TOKEN  # Set in the settings page of your repository, as a secure variable
+        keep-history: true
+        verbose: true
+        local-dir: dist/playground/
+        on:
+          tags: true

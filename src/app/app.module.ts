@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { PublicModule } from 'src/app/public/public.module';
-import { DashboardModule } from 'src/app/dashboard/dashboard.module';
-import { UserModule } from 'src/app/user/user.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
+import { JWTHttpInterceptor } from 'src/app/user/services/jwt-http.service';
 
 @NgModule({
   declarations: [
@@ -13,12 +12,17 @@ import { UserModule } from 'src/app/user/user.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    PublicModule,
-    DashboardModule,
-    UserModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTHttpInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

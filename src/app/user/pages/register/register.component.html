@@ -1,0 +1,17 @@
+
+<h1>Register</h1>
+
+<div class="error" *ngIf="error">
+  <strong>{{ error.code }}</strong>
+  <p>
+    {{ error.message }}
+  </p>
+</div>
+
+<form (ngSubmit)="register()">
+  <input [(ngModel)]="credentials.email" name="email" type="email">
+  <input [(ngModel)]="credentials.password" name="password" type="password">
+  <button type="submit">Register</button>
+</form>
+
+

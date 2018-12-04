@@ -1,4 +1,15 @@
+<nav [class.align-right]="user !== null">
+  <ng-container *ngIf="user; else noUser">
+    <a>welcome {{ user?.email }}</a>
+    <a routerLink="/auth/logout">logout</a>
+  </ng-container>
 
-<a routerLink="/dashboard">Dashboard</a>
+  <ng-template #noUser>
+    <a routerLink="/auth/login">login</a>
+    <a routerLink="/auth/register">register</a>
+  </ng-template>
+</nav>
 
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from 'src/app/dashboard/pages/home/home.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'dashboard', component: HomeComponent }
+  { path: 'public', loadChildren: './public/public.module#PublicModule' },
+  { path: 'auth', loadChildren: './user/user.module#UserModule' },
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
 ];
 
 @NgModule({
