@@ -23,7 +23,7 @@ export class Token {
 })
 export class UserService {
 
-  public token;
+  public token: Token;
 
   private url = `${environment.apiUrl}users/`;
 
@@ -58,13 +58,13 @@ export class UserService {
     return this.http
       .post<Token>(this.url + 'login', credentials)
       .pipe(
-        switchMap(token => {
+        switchMap((token: Token) => {
           this.token = token;
 
           // const headers: HttpHeaders = new HttpHeaders();
           // headers.set('Authorization', token.id);
 
-          return this.http.get<User>(this.url + token.userId + '?access_token=' + token.id);
+          return this.http.get<User>(this.url + token.userId);
         }),
         catchError(err => {
           // get nested error

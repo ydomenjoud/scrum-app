@@ -16,12 +16,14 @@ export class JWTHttpInterceptor implements HttpInterceptor {
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.userService.token}`,
-        Accept: 'application/json'
-      }
-    });
+    if (this.userService.token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `${this.userService.token.id}`,
+          Accept: 'application/json'
+        }
+      });
+    }
 
     return next.handle(request);
   }

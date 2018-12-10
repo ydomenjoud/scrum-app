@@ -8,7 +8,7 @@
   </p>
 </div>
 
-<form (ngSubmit)="register()">
+<form (ngSubmit)="register()" autocomplete="off">
   <input [(ngModel)]="credentials.email" name="email" type="email">
   <input [(ngModel)]="credentials.password" name="password" type="password">
   <button type="submit">Register</button>
